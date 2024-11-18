@@ -1,16 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const {User} = require('../../Models/Models.js')
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 
-//this is where i left off
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
     const {email, password} = req.body;
-    const hashedPassword = bcrypt.hashSync(password, 8);
 
+    try{
+        const user = new User({email, password});
+        await user.save();
 
+        res.status(200).send('User has created account');
+    }
+    catch(error){
+        const message = error.message;
+        if(message.includes('E11000 duplicate key error collection:'))
+            res.status(401).send('Email already exists');
+        else
+            res.status(500).send(message);
+    }
 });
 
 module.exports = router;

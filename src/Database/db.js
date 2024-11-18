@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {config} = require('dotenv');
 config();
 
-const url = `mongodb+srv://${process.env.accountname}:${process.env.password}@cluster0.5k5vu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+const url = `mongodb+srv://${process.env.accountname}:${process.env.password}@cluster0.5k5vu.mongodb.net/${process.env.database}?retryWrites=true&w=majority&appName=Cluster0`
 
 async function connectDB() {
     try{
