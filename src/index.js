@@ -5,7 +5,12 @@ const register = require('./Controllers/POST/Register.js');
 const login = require('./Controllers/POST/Login.js');
 const sendLink = require('./Controllers/POST/SendLink.js');
 const resetPassword = require('./Controllers/POST/ResetPassword.js');
+const addNote = require('./Controllers/POST/AddNote.js')
 const account = require('./Controllers/GET/Account.js');
+const getNotes = require('./Controllers/GET/GetNotes.js');
+const updateNote = require('./Controllers/PUT/UpdateNote.js');
+const archiveNote = require('./Controllers/PUT/ArchiveNote.js');
+const deleteNote = require('./Controllers/DELETE/DeleteNote.js');
 const connectDB = require('./Database/db.js');
 const app = express();
 const PORT = 4000;
@@ -21,12 +26,16 @@ app.use(cors({
     optionsSuccessStatus: 200
 }));
 app.use(cookieParser())
-
 app.use(register);
 app.use(login);
 app.use(sendLink);
 app.use(resetPassword);
 app.use(account);
+app.use(addNote);
+app.use(getNotes);
+app.use(updateNote);
+app.use(archiveNote);
+app.use(deleteNote);
 
 app.get('/', (req, res) => {
     res.status(200).send('Hello World')

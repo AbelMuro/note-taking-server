@@ -7,6 +7,7 @@ const userSchema = new Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     notes: {type: Array},
+    archivedNotes: {type: Array},
     resetPasswordToken: {type: String},
     resetPasswordExpires: {type: Date}
 });
@@ -31,8 +32,8 @@ userSchema.methods.createPasswordResetToken = function() {
     return resetToken;
 }      
 
-const User = mongoose.model('user', userSchema, 'accounts')        //create a model that will be used to create documents
+const User = mongoose.model('user', userSchema, 'accounts');        //create a model that will be used to create documents
 
 module.exports = {
-    User
+    User,
 }
