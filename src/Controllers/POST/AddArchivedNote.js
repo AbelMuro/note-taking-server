@@ -7,6 +7,8 @@ const {config} = require('dotenv');
 const ObjectId = mongoose.Types.ObjectId;
 config();
 
+//i will need to create a route for the /update-archived-note
+
 router.post('/add-archived-note', async (req, res) => {
     const {title, tags, lastEdited, body} = req.body;
     const id = new ObjectId();
