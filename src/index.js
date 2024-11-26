@@ -13,6 +13,7 @@ const archiveNote = require('./Controllers/PUT/ArchiveNote.js');
 const deleteNote = require('./Controllers/DELETE/DeleteNote.js');
 const getArchivedNotes = require('./Controllers/GET/GetArchivedNotes.js');
 const addArchivedNote = require('./Controllers/POST/AddArchivedNote.js');
+const updateArchivedNote = require('./Controllers/PUT/UpdateArchivedNote.js');
 const connectDB = require('./Database/db.js');
 const app = express();
 const PORT = 4000;
@@ -40,6 +41,7 @@ app.use(archiveNote);
 app.use(deleteNote);
 app.use(getArchivedNotes);
 app.use(addArchivedNote);
+app.use(updateArchivedNote);
 
 app.get('/', (req, res) => {
     res.status(200).send('Hello World')
