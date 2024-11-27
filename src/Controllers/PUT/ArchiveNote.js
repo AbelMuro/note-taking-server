@@ -5,8 +5,7 @@ const router = express.Router();
 const {config} = require('dotenv');
 config();
 
-
-router.put('/archive_note', async (req, res) => {
+router.put('/archive-note', async (req, res) => {
     const {id} = req.body;   
     const token = req.cookies.accessToken;
     const JWT_SECRET = process.env.JWT_SECRET;
@@ -21,18 +20,15 @@ router.put('/archive_note', async (req, res) => {
         if(!user) 
             return res.status(404).send('Document not found');
         let notes = user.notes || [];
-        let noteToArchive;
-        notes = notes.filter((note) => {
-            console.log(note.id.equals(id))
+        notes = notes.map((note) => {
             if(note.id.equals(id)){
-                noteToArchive = note;
-                return false;
+                note.archived = true;
+                return note;
             }
             else
-                return true;
+                return note;
         });
 
-        user.archivedNotes = [...user.archivedNotes, noteToArchive];
         user.notes = notes;
         await user.save();
         res.status(200).send('Note has been successfully archived');

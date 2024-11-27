@@ -7,7 +7,6 @@ const userSchema = new Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     notes: {type: Array},
-    archivedNotes: {type: Array},
     resetPasswordToken: {type: String},
     resetPasswordExpires: {type: Date}
 });

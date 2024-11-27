@@ -20,9 +20,11 @@ router.put('/update-note', async (req, res) => {
         const user = await User.findOne({email});
         if(!user) 
             return res.status(404).send('Document not found');
+
         let notes = user.notes || [];
         notes = notes.map(note => note.id.equals(id) ? {...note, ...noteToUpdate} : note);
-        user.notes = notes;
+        user.notes = notes;    
+
         await user.save();
         res.status(200).send('Note has been successfully updated');
     }

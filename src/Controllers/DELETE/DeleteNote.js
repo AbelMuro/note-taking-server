@@ -5,7 +5,8 @@ const router = express.Router();
 const {config} = require('dotenv');
 config();
 
-router.delete('/delete-note:id', async (req, res) => {
+router.delete('/delete-note/:id', async (req, res) => {
+    let type = req.params.type;    
     let id = req.params.id;
     id = id.replace(':', '');
     const token = req.cookies.accessToken;
@@ -20,9 +21,11 @@ router.delete('/delete-note:id', async (req, res) => {
         const user = await User.findOne({email});
         if(!user) 
             return res.status(404).send('Document not found');
+
         let notes = user.notes || [];
         notes = notes.filter((note) => !note.id.equals(id))
-        user.notes = notes;
+        user.notes = notes;            
+        
         await user.save();
         res.status(200).send('Note has been successfully deleted');
     }

@@ -7,7 +7,8 @@ const {config} = require('dotenv');
 const ObjectId = mongoose.Types.ObjectId;
 config();
 
-router.post('/add-note', async (req, res) => {
+router.post('/add-note/:type', async (req, res) => {
+    const type = req.params.type;
     const {title, tags, lastEdited, body} = req.body;
     const id = new ObjectId();
     const token = req.cookies.accessToken;
@@ -22,9 +23,11 @@ router.post('/add-note', async (req, res) => {
         const user = await User.findOne({email});
         if(!user)
             return res.status(404).send('Document not found');
+
         const notes = user.notes || [];
-        notes.push({id, title, tags, lastEdited, body});
+        notes.push({id, title, tags, lastEdited, body, archived: type === 'archived'});
         user.notes = notes;
+    
         await user.save();
         res.status(200).send('Note successfully posted');
     }
@@ -35,8 +38,6 @@ router.post('/add-note', async (req, res) => {
             res.status(403).send('Validation error, document is missing required properties')
         else
             res.status(500).send(error.message);
-        
-            
     }
 });
 
