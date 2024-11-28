@@ -21,10 +21,8 @@ router.put('/archive-note', async (req, res) => {
             return res.status(404).send('Document not found');
         let notes = user.notes || [];
         notes = notes.map((note) => {
-            if(note.id.equals(id)){
-                note.archived = true;
-                return note;
-            }
+            if(note.id.equals(id))
+                return {...note, archived: true}; 
             else
                 return note;
         });

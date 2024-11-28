@@ -19,24 +19,16 @@ router.put('/restore-note', async (req, res) => {
         const user = await User.findOne({email});
         if(!user) 
             return res.status(404).send('Document not found');
-        let archivedNotes = user.archivedNotes || [];
-        const notes = user.notes;
-        let noteToRestore;
-        archivedNotes = archivedNotes.filter((note) => {
-            if(note.id.equals(id)){
-                noteToRestore = note;
-                return false
-            }
+        let notes = user.notes || [];
+        notes = notes.map((note) => {
+            if(note.id.equals(id))
+                return {...note, archived: false};
             else 
-                return true;
-                
+                return note;    
         });
-        notes.push(noteToRestore);
         user.notes = notes;
-        user.archivedNotes = archivedNotes;
         await user.save();
         res.status(200).send('Archived note has been restored');
-
     }
     catch(error){
         if(error.message.includes('E11000 duplicate key error collection'))

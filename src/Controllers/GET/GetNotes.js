@@ -19,7 +19,7 @@ router.get('/get-notes/:type', async (req, res) => {
         const user = await User.findOne({email});
         if(!user)
             return res.status(404).send('Document not found');
-        let allNotes = []
+        let allNotes;
         if(type === 'archived')
             allNotes = user.notes.filter(note => note.archived);
         else if(type === 'notes')
@@ -34,11 +34,7 @@ router.get('/get-notes/:type', async (req, res) => {
             const notes = user.notes;
             const notesWithTags = notes.filter((note => note.tags.includes(type)));
             allNotes = notesWithTags;
-        }
-
-        console.log(allNotes);
-
-    
+        } 
         res.status(200).json(allNotes);
     }
     catch(error){
