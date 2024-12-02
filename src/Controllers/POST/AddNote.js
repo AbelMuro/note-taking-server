@@ -29,7 +29,7 @@ router.post('/add-note/:type', async (req, res) => {
         user.notes = notes;
     
         await user.save();
-        res.status(200).send('Note successfully posted');
+        res.status(200).send(`${id}`);
     }
     catch(error){
         if(error.message.includes('E11000 duplicate key error collection'))
