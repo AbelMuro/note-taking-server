@@ -12,6 +12,7 @@ const updateNote = require('./Controllers/PUT/UpdateNote.js');
 const archiveNote = require('./Controllers/PUT/ArchiveNote.js');
 const deleteNote = require('./Controllers/DELETE/DeleteNote.js');
 const restoreNote = require('./Controllers/PUT/RestoreNote.js');
+const changePassword = require('./Controllers/PUT/ChangePassword.js');
 const connectDB = require('./Database/db.js');
 const app = express();
 const PORT = 4000;
@@ -38,6 +39,7 @@ app.use(updateNote);
 app.use(archiveNote);
 app.use(deleteNote);
 app.use(restoreNote);
+app.use(changePassword);
 
 app.get('/', (req, res) => {
     res.status(200).send('Hello World')

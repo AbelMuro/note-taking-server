@@ -16,7 +16,7 @@ userSchema.pre('save', async function (next) {              //pre() is a middlew
         return next();                                      //will execute the next middleware, if there are no more middlewares, then save() will be called
 
     const salt = await bcrypt.genSalt(10);                  //generates a salt (a random value that is added to the password to enhance security) 
-    this.password = await bcrypt.hash(this.password, salt); //we hash the password (convert the password into a random sequence of characters) 
+    this.password = await bcrypt.hash(this.password, salt); //we hash the password (convert the password into a random sequence of characters, each of these characters will map to the original password) 
     next();
 });
 
