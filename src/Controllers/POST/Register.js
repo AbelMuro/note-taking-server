@@ -10,7 +10,7 @@ router.post('/register', async (req, res) => {
         const user = new User({email, password});
         await user.save();
 
-        res.status(200).send('User has created account');
+        res.status(200).send('Account has been created');
     }
     catch(error){
         const message = error.message;
