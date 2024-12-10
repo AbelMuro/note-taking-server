@@ -33,7 +33,14 @@ router.get('/get-notes/:type', async (req, res) => {
         else if(type.startsWith('search')){
             const query = type.split(':')[1];
             const notes = user.notes;
-            allNotes = notes.filter(note => note.title.toLowerCase().includes(query) || note.tags.toLowerCase().includes(query) || note.body.toLowerCase().includes(query))
+            allNotes = notes.filter(note => {
+                if(!query)
+                    return false
+                else if(note.title.toLowerCase().includes(query) || note.tags.toLowerCase().includes(query) || note.body.toLowerCase().includes(query))
+                    return true;
+                else
+                    return false;
+            })
         }
         else{
             const notes = user.notes;
