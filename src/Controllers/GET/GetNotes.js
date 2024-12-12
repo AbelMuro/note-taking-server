@@ -42,11 +42,12 @@ router.get('/get-notes/:type', async (req, res) => {
                     return false;
             })
         }
-        else{
+        else if(type.startsWith('tags:')){
+            const tag = type.split(':')[1];
             const notes = user.notes;
-            const notesWithTags = notes.filter((note => note.tags.includes(type)));
+            const notesWithTags = notes.filter((note => note.tags.includes(tag) && tag));
             allNotes = notesWithTags;
-        } 
+        }
         res.status(200).json(allNotes);
     }
     catch(error){
