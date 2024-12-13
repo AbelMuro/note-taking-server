@@ -5,8 +5,7 @@ const router = express.Router();
 const {config} = require('dotenv');
 config();
 
-router.delete('/delete-note/:id', async (req, res) => {
-    let type = req.params.type;    
+router.delete('/delete-note/:id', async (req, res) => {  
     let id = req.params.id;
     id = id.replace(':', '');
     const token = req.cookies.accessToken;
