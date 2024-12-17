@@ -22,7 +22,7 @@ connectDB();
 
 app.use(express.json());
 app.use(cors({
-    origin: 'https://note-taking-app-front-end.netlify.app/',
+    origin: 'https://note-taking-app-front-end.netlify.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type'],
     credentials: true,
