@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken');
 const {config} = require('dotenv');
 config();
 
-//this is where i left off i will need to make a fetch request to the URI below and request the user data from their google account
-
 router.post('/google-login', async (req, res) => {
     const {token} = req.body;
     const JWT_SECRET = process.env.JWT_SECRET;  
