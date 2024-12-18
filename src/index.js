@@ -3,6 +3,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');   
 const register = require('./Controllers/POST/Register.js');
 const login = require('./Controllers/POST/Login.js');
+const googleLogin = require('./Controllers/POST/GoogleLogin.js');
 const sendLink = require('./Controllers/POST/SendLink.js');
 const resetPassword = require('./Controllers/POST/ResetPassword.js');
 const addNote = require('./Controllers/POST/AddNote.js')
@@ -42,6 +43,7 @@ app.use(deleteNote);
 app.use(restoreNote);
 app.use(changePassword);
 app.use(logout);
+app.use(googleLogin);
 
 app.get('/', (req, res) => {
     res.status(200).send('Hello World')
