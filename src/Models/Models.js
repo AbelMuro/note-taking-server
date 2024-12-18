@@ -5,14 +5,14 @@ const crypto = require('crypto');
 
 const userSchema = new Schema({
     email: {type: String, required: true, unique: true},
-    password: {type: String, required: true},
+    password: {type: String},
     notes: {type: Array},
     resetPasswordToken: {type: String},
     resetPasswordExpires: {type: Date}
 });
 
 userSchema.pre('save', async function (next) {              //pre() is a middleware that executes a function before the 'save' method is executed
-    if(!this.isModified('password'))                        //if the password has NOT been modified
+    if(!this.isModified('password') || !this.password)                        //if the password has NOT been modified or if the password is empty
         return next();                                      //will execute the next middleware, if there are no more middlewares, then save() will be called
 
     const salt = await bcrypt.genSalt(10);                  //generates a salt (a random value that is added to the password to enhance security) 
@@ -21,7 +21,10 @@ userSchema.pre('save', async function (next) {              //pre() is a middlew
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) { 
-    return await bcrypt.compare(enteredPassword, this.password)
+    if(!this.password)
+        return false;
+    else
+        return await bcrypt.compare(enteredPassword, this.password)
 };
 
 userSchema.methods.createPasswordResetToken = function() {   
