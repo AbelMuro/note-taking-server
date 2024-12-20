@@ -50,7 +50,7 @@ router.get('/', (req, res) => {
     res.status(200).send('Hello World')
 })
 
-app.use('/.netlify/functions/app', router);
+app.use('/.netlify/functions/app', router)
 
 app.listen(PORT, (error) => {
     if(error){
