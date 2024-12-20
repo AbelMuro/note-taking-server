@@ -1,6 +1,4 @@
 const express = require('express');
-const serverless = require("serverless-http");
-
 const cors = require('cors');
 const cookieParser = require('cookie-parser');   
 const register = require('./Controllers/POST/Register.js');
@@ -46,7 +44,6 @@ app.use(restoreNote);
 app.use(changePassword);
 app.use(logout);
 app.use(googleLogin);
-app.use("/.netlify/functions/app", router);
 
 app.get('/', (req, res) => {
     res.status(200).send('Hello World')
@@ -60,6 +57,3 @@ app.listen(PORT, (error) => {
 
     console.log(`Server is running in port ${PORT}`);
 })
-
-
-module.exports.handler = serverless(app);
