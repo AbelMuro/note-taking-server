@@ -17,7 +17,6 @@ const changePassword = require('./Controllers/PUT/ChangePassword.js');
 const logout = require('./Controllers/PUT/Logout.js');
 const connectDB = require('./Database/db.js');
 const app = express();
-const router = express.Router();
 const PORT = 4000;
 
 connectDB();
@@ -31,26 +30,24 @@ app.use(cors({
     optionsSuccessStatus: 200
 }));
 app.use(cookieParser())
-app.use('/.netlify/functions/app', register);
-app.use('/.netlify/functions/app/login', login);
-app.use('/.netlify/functions/app', sendLink);
-app.use('/.netlify/functions/app', resetPassword);
-app.use('/.netlify/functions/app', account);
-app.use('/.netlify/functions/app', addNote);
-app.use('/.netlify/functions/app', getNotes);
-app.use('/.netlify/functions/app', updateNote);
-app.use('/.netlify/functions/app', archiveNote);
-app.use('/.netlify/functions/app', deleteNote);
-app.use('/.netlify/functions/app', restoreNote);
-app.use('/.netlify/functions/app', changePassword);
-app.use('/.netlify/functions/app', logout);
-app.use('/.netlify/functions/app', googleLogin);
+app.use(register);
+app.use(login);
+app.use(sendLink);
+app.use(resetPassword);
+app.use(account);
+app.use(addNote);
+app.use(getNotes);
+app.use(updateNote);
+app.use(archiveNote);
+app.use(deleteNote);
+app.use(restoreNote);
+app.use(changePassword);
+app.use(logout);
+app.use(googleLogin);
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).send('Hello World')
 })
-
-app.use('/.netlify/functions/app', router)
 
 app.listen(PORT, (error) => {
     if(error){
