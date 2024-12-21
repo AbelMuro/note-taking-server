@@ -32,7 +32,7 @@ app.use(cors({
 }));
 app.use(cookieParser())
 app.use('/.netlify/functions/app', register);
-app.use('/.netlify/functions/app', login);
+app.use('/.netlify/functions/app/login', login);
 app.use('/.netlify/functions/app', sendLink);
 app.use('/.netlify/functions/app', resetPassword);
 app.use('/.netlify/functions/app', account);
