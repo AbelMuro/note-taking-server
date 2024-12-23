@@ -7,7 +7,6 @@ const googleLogin = require('./Controllers/POST/GoogleLogin.js');
 const sendLink = require('./Controllers/POST/SendLink.js');
 const resetPassword = require('./Controllers/POST/ResetPassword.js');
 const addNote = require('./Controllers/POST/AddNote.js')
-const account = require('./Controllers/GET/Account.js');
 const getNotes = require('./Controllers/GET/GetNotes.js');
 const updateNote = require('./Controllers/PUT/UpdateNote.js');
 const archiveNote = require('./Controllers/PUT/ArchiveNote.js');
@@ -38,7 +37,6 @@ app.use(register);
 app.use(login);
 app.use(sendLink);
 app.use(resetPassword);
-app.use(account);
 app.use(addNote);
 app.use(getNotes);
 app.use(updateNote);
