@@ -15,7 +15,7 @@ router.post('/add-note/:type', async (req, res) => {
     const JWT_SECRET = process.env.JWT_SECRET;
 
     if(!token)
-        return res.status(401).send('Please enable third-party cookies and cross-site-tracking to use this app');
+        return res.status(401).send('Please enable third-party cookies and cross-site-tracking in your browser to use this app');
 
     try{
         const decoded = jwt.verify(token, JWT_SECRET);
