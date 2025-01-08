@@ -22,8 +22,7 @@ router.post('/login', async (req, res) => {
         res.cookie('accessToken', token, {
             httpOnly: true,
             secure: true,
-            sameSite: 'Strict',
-            maxAge: 1000 * 60 * 60
+            sameSite: 'None'
         });
 
         res.status(200).send('User is logged in');

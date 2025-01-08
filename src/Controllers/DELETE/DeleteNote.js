@@ -12,7 +12,7 @@ router.delete('/delete-note/:id', async (req, res) => {
     const JWT_SECRET = process.env.JWT_SECRET;
 
     if(!token)
-        return res.status(401).send('Please log in again, you have been logged off for security purposes');
+        return res.status(401).send('Please enable third-party cookies and cross-site-tracking to use this app');
 
     try{
         const decoded = jwt.verify(token, JWT_SECRET);
